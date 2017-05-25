@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Assignment 1/Assignment 1.iml" filepath="$PROJECT_DIR$/Assignment 1/Assignment 1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Assignment 2/Assignment 2.iml" filepath="$PROJECT_DIR$/Assignment 2/Assignment 2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Assignment 3 - Lambdas/Assignment 3 - Lambdas.iml" filepath="$PROJECT_DIR$/Assignment 3 - Lambdas/Assignment 3 - Lambdas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Assignment 4/Assignment 4.iml" filepath="$PROJECT_DIR$/Assignment 4/Assignment 4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Assignment 5/Assignment 5.iml" filepath="$PROJECT_DIR$/Assignment 5/Assignment 5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Assignment 6/Assignment 6.iml" filepath="$PROJECT_DIR$/Assignment 6/Assignment 6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CS 143.iml" filepath="$PROJECT_DIR$/CS 143.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Chess/Chess.iml" filepath="$PROJECT_DIR$/Chess/Chess.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Gaddis Source Code/Case Studies/Gaddis Source Code.iml" filepath="$PROJECT_DIR$/../Gaddis Source Code/Case Studies/Gaddis Source Code.iml" />
+      <module fileurl="file://$PROJECT_DIR$/In Class/In Class.iml" filepath="$PROJECT_DIR$/In Class/In Class.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Misc/Misc.iml" filepath="$PROJECT_DIR$/Misc/Misc.iml" />
+    </modules>
+  </component>
+</project>
