@@ -1,84 +1,97 @@
 package generic_linkedlist;
 
-/**
- * The DLinkedList class implements a doubly
- * Linked list.
- */
 @SuppressWarnings("Duplicates")
-class DLinkedList<E>{
-    /**
-     * The Node class stores a list element
-     * and a reference to the next node.
-     */
+class DLinkedList<E> {
+
 
     //Steps through the list and clears each element
     //
     public void clear() {
         while (first != null) {
-            Node n = first.next;
+            Node<E> n = first.next;
             first = null;
             first = n;
         }
     }
 
+    public E get(int index) {
+        Node<E> e = first;
+        int count = 0;
+        while (count < index) {
+            e = e.next;
+            count++;
+        }
+        return e.value;
+    }
+
+    public E set(int index, E val) {
+        if (index < 0 || index > size()) {
+            String message = String.valueOf(index);
+            throw new IndexOutOfBoundsException(message);
+        }
+        Node<E> pred = first;
+        Node<E> succ;
+
+        if (index == 0) {
+            succ = first;
+            first = new Node<E>(val, succ, null);
+            return null;
+        } else if (index == size()) {
+            pred = last;
+            Node<E> middle = new Node<E>(val, null, pred);
+            pred.next = middle;
+            return (E)middle.prev;
+        } else {
+            succ = first.next;
+
+            for (int i = 0; i < index-1; i++) {
+                pred = succ;
+                succ = succ.next;
+            }
+
+            //create new node
+            Node<E> middle = new Node(val, succ, pred);
+            pred.next = middle;//point pred to middle
+            succ.prev = middle;//point succ to middle
+            return (E)middle.prev;
+        }
+
+    }
+
     private class Node<E> {
         E value;   // Value of a list element
-        Node next;      // Next node in the list
-        Node prev;      // Previous element in the list
+        Node<E> next;      // Next node in the list
+        Node<E> prev;      // Previous element in the list
 
-        /**
-         * Constructor.
-         *
-         * @param val The element to be stored in the node.
-         * @param n   The reference to the successor node.
-         * @param p   The reference to the predecessor node.
-         */
-        Node(E val, Node n, Node p) {
+        Node(E val, Node<E> n, Node<E> p) {
             value = val;
             next = n;
             prev = p;
         }
 
-        /**
-         * Constructor.
-         *
-         * @param val The element to be stored in the node.
-         */
         Node(E val) {
             // Just call the other (sister) constructor
             this(val, null, null);
         }
     }
 
-    private Node first;   // Head of the list
-    private Node last;    // Last element on the list 
+    private Node<E> first;   // Head of the list
+    private Node<E> last;    // Last element on the list
 
-    /**
-     * Constructor.
-     */
+
     public DLinkedList() {
         first = null;
         last = null;
     }
 
-    /**
-     * The isEmpty method checks to see if the list
-     * is empty.
-     *
-     * @return true if list is empty, false otherwise.
-     */
+
     public boolean isEmpty() {
         return first == null;
     }
 
-    /**
-     * The size method returns the length of the list.
-     *
-     * @return The number of elements in the list.
-     */
     public int size() {
         int count = 0;
-        Node p = first;
+        Node<E> p = first;
         while (p != null) {
             // There is an element at p
             count++;
@@ -87,29 +100,18 @@ class DLinkedList<E>{
         return count;
     }
 
-    /**
-     * The add method adds to the end of the list.
-     *
-     * @param e The value to add.
-     */
     public void add(E e) {
         if (isEmpty()) {
-            last = new Node(e);
+            last = new Node<>(e);
             first = last;
         } else {
             // Add to end of existing list
-            last.next = new Node(e, null, last);
+            last.next = new Node<>(e, null, last);
             last = last.next;
         }
     }
 
-    /**
-     * This add method adds an element at an index.
-     *
-     * @param e     The element to add to the list.
-     * @param index The index at which to add.
-     * @throws IndexOutOfBoundsException When the index is out of bounds.
-     */
+
     public void add(int index, E e) {
         if (index < 0 || index > size()) {
             String message = String.valueOf(index);
@@ -119,8 +121,8 @@ class DLinkedList<E>{
         // Index is at least 0
         if (index == 0) {
             // New element goes at beginning
-            Node p = first;            // Old first
-            first = new Node(e, p, null);
+            Node<E> p = first;            // Old first
+            first = new Node<>(e, p, null);
             if (p != null)
                 p.prev = first;
             if (last == null)
@@ -130,7 +132,7 @@ class DLinkedList<E>{
 
         // pred will point to the predecessor
         // of the new node.
-        Node pred = first;
+        Node<E> pred = first;
         for (int k = 1; k <= index - 1; k++) {
             pred = pred.next;
         }
@@ -138,8 +140,8 @@ class DLinkedList<E>{
         // Splice in a node with the new element
         // We want to go from  pred-- succ to
         // pred--middle--succ
-        Node succ = pred.next;
-        Node middle = new Node(e, succ, pred);
+        Node<E> succ = pred.next;
+        Node<E> middle = new Node<>(e, succ, pred);
         pred.next = middle;
         if (succ == null)
             last = middle;
@@ -147,18 +149,11 @@ class DLinkedList<E>{
             succ.prev = middle;
     }
 
-    /**
-     * The toString method computes the string
-     * representation of the list.
-     *
-     * @return The string representation of the
-     * linked list.
-     */
     public String toString() {
         StringBuilder strBuilder = new StringBuilder();
 
         // Use p to walk down the linked list
-        Node p = first;
+        Node<E> p = first;
         while (p != null) {
             strBuilder.append(p.value + "\n");
             p = p.next;
@@ -166,16 +161,6 @@ class DLinkedList<E>{
         return strBuilder.toString();
     }
 
-    /**
-     * The remove method removes the element
-     * at a given position.
-     *
-     * @param index The position of the element
-     *              to remove.
-     * @return The element removed.
-     * @throws IndexOutOfBoundsException When
-     *                                   index is out of bounds.
-     */
     public E remove(int index) {
         if (index < 0 || index >= size()) {
             String message = String.valueOf(index);
@@ -183,13 +168,13 @@ class DLinkedList<E>{
         }
 
         // Locate the node targeted for removal
-        Node target = first;
+        Node<E> target = first;
         for (int k = 1; k <= index; k++)
             target = target.next;
 
-        E element = (E) target.value;  // Element to return
-        Node pred = target.prev;        // Node before the target
-        Node succ = target.next;        // Node after the target
+        E element = target.value;  // Element to return
+        Node<E> pred = target.prev;        // Node before the target
+        Node<E> succ = target.next;        // Node after the target
 
         // Route forward and back pointers around
         // the node to be removed
@@ -207,31 +192,27 @@ class DLinkedList<E>{
     }
 
 
-
 //    public void clear() {
 //        first = null;
 //    }
 
-    /**
-     * The remove method removes an element from the list.
-     *
-     * @param element The element to remove.
-     * @return true if the element was removed, false otherwise.
-     */
+
     public boolean remove(String element) {
         if (isEmpty())
             return false;
 
         // Locate the node targeted for removal
-        Node target = first;
+        Node<E> target = first;
         while (target != null
-                && !element.equals(target.value)) { target = target.next; }
+                && !element.equals(target.value)) {
+            target = target.next;
+        }
 
         if (target == null)
             return false;
 
-        Node pred = target.prev;        // Node before the target
-        Node succ = target.next;        // Node after the target
+        Node<E> pred = target.prev;        // Node before the target
+        Node<E> succ = target.next;        // Node after the target
 
         // Route forward and back pointers around
         // the node to be removed
@@ -249,7 +230,7 @@ class DLinkedList<E>{
     }
 
     public static void main(String[] args) {
-        DLinkedList ll = new DLinkedList();
+        DLinkedList ll = new DLinkedList<>();
         ll.add("Amy");
         ll.add("Bob");
         ll.add(0, "Al");
@@ -258,7 +239,8 @@ class DLinkedList<E>{
         ll.add(0, 5);
         //ll.clear();
         ll.add("test");
-
+        ll.set(5, "one");
+        //System.out.println(ll.get(1));
 
         System.out.println("The elements of the list are:");
         System.out.println(ll);
