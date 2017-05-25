@@ -162,7 +162,7 @@ class LinkedList1
       Node p = first;
       while (p != null)
       {
-         strBuilder.append(p.value + "\n"); 
+         strBuilder.append(p.value).append("\n");
          p = p.next;
       }      
       return strBuilder.toString(); 
