@@ -26,6 +26,9 @@ class GenericDLinkedList<E> {
         return e.value;
     }
 
+    /**
+     * Re-Iterate, return node.prev.value
+     */
     public E set(int index, E val) {
         if (index < 0 || index > size()) {
             String message = String.valueOf(index);
@@ -42,7 +45,7 @@ class GenericDLinkedList<E> {
             pred = last;
             Node middle = new Node(val, null, pred);
             pred.next = middle;
-            return (E) middle.prev;
+            return (E)middle.prev;
         } else {
             succ = first.next;
 
@@ -55,7 +58,7 @@ class GenericDLinkedList<E> {
             Node middle = new Node(val, succ, pred);
             pred.next = middle;//point pred to middle
             succ.prev = middle;//point succ to middle
-            return (E) middle.prev;
+            return (E)middle.prev;
         }
     }
 
