@@ -1,7 +1,6 @@
 /**
  * The genericDLinkedList class is a generic implementation of the DLinkedList class.
  */
-
 package generic_linkedlist;
 
 @SuppressWarnings("Duplicates")
@@ -26,40 +25,31 @@ class GenericDLinkedList<E> {
         return e.value;
     }
 
-    /**
-     * Re-Iterate, return node.prev.value
-     */
     public E set(int index, E val) {
-        if (index < 0 || index > size()) {
-            String message = String.valueOf(index);
-            throw new IndexOutOfBoundsException(message);
-        }
-        Node pred = first;
-        Node succ;
+        Node pred;
+        Node succ = first;
+        Node middle = null;
+        final int SIZE = size();
 
         if (index == 0) {
             succ = first;
-            first = new Node(val, succ, null);
-            return null;
-        } else if (index == size()) {
+            middle = new Node(val, succ, null);
+            succ.prev = middle;
+            first = middle;
+        } else if (index == SIZE) {
             pred = last;
-            Node middle = new Node(val, null, pred);
+            middle = new Node(val, null, pred);
             pred.next = middle;
-            return (E)middle.prev;
-        } else {
-            succ = first.next;
-
+            last = middle;
+        } else
             for (int i = 0; i < index - 1; i++) {
                 pred = succ;
                 succ = succ.next;
+                middle = new Node(val, succ, pred);
+                pred.next = middle;
+                succ.prev = middle;
             }
-
-            //create new node
-            Node middle = new Node(val, succ, pred);
-            pred.next = middle;//point pred to middle
-            succ.prev = middle;//point succ to middle
-            return (E)middle.prev;
-        }
+        return middle.prev.value;
     }
 
     private class Node {

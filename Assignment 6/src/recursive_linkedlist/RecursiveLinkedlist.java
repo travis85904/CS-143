@@ -1,80 +1,43 @@
 /**
  * Travis Davis
- * 
+ * <p>
  * This is a modified version of LinkedList1. I have added sort() and reverse() methods.
+ * The sort method sorts the list in alphabetical order.
+ * The reverse method puts the list in reverse order.
  */
 package recursive_linkedlist;
 
-/**
- * The LinkedList1 class implements a Linked list.
- */
+import java.util.Stack;
+
 @SuppressWarnings("Duplicates")
-class RecursiveLinkedList {
-    /**
-     * The Node class stores a list element
-     * and a reference to the next node.
-     */
+class RecursiveLinkedlist {
+    private Node prev = null;
+    private Node current;
+    private Node next;
+    private Node tempLast;
+
     public void sort() {
-        Node current = first;
-        Node temp;
-        int size = size();
-
-        //check each Node
-        for (int i = 0; i < size; i++) {
-            Node prev = null;
-            current = first;
-            Node next = first.next;
-
-            //check current against all the other Nodes
-            while (next != null) {
-
-                //Swap the Nodes that are not in alphabetical order
-                if (current.value.compareToIgnoreCase(next.value) > 0) {
-                    temp = current;
-                    current = next;
-                    next = temp;
-                    next.next = current.next;
-                    current.next = next;
-                    if (prev != null)
-                        prev.next = current;
-                    if (prev == null)
-                        first = current;
-
-                }
-
-                prev = current;
-                current = current.next;
-                next = next.next;
-            }
-        }
-
-            last = current;
-            //current.next = null;
 
     }
 
-
-
-    //The reverse() method iterates through the LinkedList and reverses all the next pointers.
-    //
+    /**
+     * The reverse() method iterates through the LinkedList and reverses all the next pointers.
+     */
     public void reverse() {
-        Node pred;
-        Node succ;
-        Node tempFirst = last;
+        Stack stack = new Stack();
 
-        for (int i = size() - 1; i > 0; i--) {
-            pred = first;
+        getNext();
 
-            for (int j = 0; j < i - 1; j++) {
-                pred = pred.next;
-            }
+    }
 
-            succ = pred.next;
-            succ.next = pred;
-        }
-        last = first;
-        first = tempFirst;
-        last.next = null;
+    private void getNext() {
+        //if(first.next!=null)
+
+    }
+
+    private void setNodes() {
+        current = first;
+        next = current.next;
     }
 
     private class Node {
@@ -109,7 +72,7 @@ class RecursiveLinkedList {
     /**
      * Constructor.
      */
-    public RecursiveLinkedList() {
+    public RecursiveLinkedlist() {
         first = null;
         last = null;
     }
@@ -301,7 +264,7 @@ class RecursiveLinkedList {
     }
 
     public static void main(String[] args) {
-        RecursiveLinkedList ll = new RecursiveLinkedList();
+        RecursiveLinkedlist ll = new RecursiveLinkedlist();
         ll.add("Jmy");
         ll.add("Bob");
         ll.add(0, "Zl");
@@ -309,15 +272,19 @@ class RecursiveLinkedList {
         ll.add(4, "Carol");
         ll.add("A");
         ll.add("a");
+        ll.add("r");
+        ll.add("g");
+        ll.add("B");
+        ll.add("q");
         //ll.add(2, "Yami");
         System.out.println("The members of the list are:");
         System.out.print(ll);
         //ll.reverse();
         ll.sort();
         System.out.println("\nSorted:\n" + ll);
-        System.out.println("First: "+ll.first.value);
-        System.out.println("Last: "+ll.last.value);
-        if(ll.last.next==null)
+        System.out.println("First: " + ll.first.value);
+        System.out.println("Last: " + ll.last.value);
+        if (ll.last.next == null)
             System.out.println("null");
     }
 }

@@ -1,31 +1,33 @@
 /**
  * Travis Davis
- *
+ * <p>
  * This is a modified version of LinkedList1. I have added sort() and reverse() methods.
+ * The sort method sorts the list in alphabetical order.
+ * The reverse method puts the list in reverse order.
  */
 package linkedlist_sorting_reversing;
 
-/**
- * The LinkedList1 class implements a Linked list.
- */
+import com.sun.jmx.remote.internal.ArrayQueue;
+
+
 @SuppressWarnings("Duplicates")
 class LinkedList1 {
     /**
-     * The Node class stores a list element
-     * and a reference to the next node.
+     * The sort method puts the list in alphabetical order, by taking a Node and comparing its value to the rest of the nodes.
+     * It reapeats this for every Node in the list.
      */
     public void sort() {
         Node current = first;
         Node temp;
         int size = size();
 
-        //check each Node
+        //Check each Node
         for (int i = 0; i < size; i++) {
             Node prev = null;
             current = first;
             Node next = first.next;
 
-            //check current against all the other Nodes
+            //Check current against all the other Nodes
             while (next != null) {
 
                 //Swap the Nodes that are not in alphabetical order
@@ -39,7 +41,6 @@ class LinkedList1 {
                         prev.next = current;
                     if (prev == null)
                         first = current;
-
                 }
 
                 prev = current;
@@ -47,35 +48,45 @@ class LinkedList1 {
                 next = next.next;
             }
         }
-
-            last = current;
-            //current.next = null;
-
+        last = current;
     }
 
-
-
-    //The reverse() method iterates through the LinkedList and reverses all the next pointers.
-    //
+    /**
+     * The reverse() method iterates through the LinkedList and reverses all the next pointers.
+     */
     public void reverse() {
-        Node pred;
-        Node succ;
-        Node tempFirst = last;
+        ArrayQueue queue = new ArrayQueue(size());
 
-        for (int i = size() - 1; i > 0; i--) {
-            pred = first;
+        do {
+            queue.add(first.value);
+            first = first.next;
+        } while (first != null);
 
-            for (int j = 0; j < i - 1; j++) {
-                pred = pred.next;
-            }
-
-            succ = pred.next;
-            succ.next = pred;
+        for (Object o : queue) {
+            add(0, o.toString());
         }
-        last = first;
-        first = tempFirst;
-        last.next = null;
+
     }
+
+//    public void reverse_() {
+//        Node pred;
+//        Node succ;
+//        Node tempFirst = last;
+//
+//        for (int i = size() - 1; i > 0; i--) {
+//            pred = first;
+//
+//            for (int j = 0; j < i - 1; j++) {
+//                pred = pred.next;
+//            }
+//
+//            succ = pred.next;
+//            succ.next = pred;
+//        }
+//        last = first;
+//        first = tempFirst;
+//        last.next = null;
+//    }
 
     private class Node {
         String value;
@@ -309,15 +320,21 @@ class LinkedList1 {
         ll.add(4, "Carol");
         ll.add("A");
         ll.add("a");
+        ll.add("r");
+        ll.add("g");
+        ll.add("B");
+        ll.add("q");
         //ll.add(2, "Yami");
         System.out.println("The members of the list are:");
         System.out.print(ll);
-        //ll.reverse();
-        ll.sort();
-        System.out.println("\nSorted:\n" + ll);
-        System.out.println("First: "+ll.first.value);
-        System.out.println("Last: "+ll.last.value);
-        if(ll.last.next==null)
-            System.out.println("null");
+        ll.reverse();
+        System.out.println("Reversed: ");
+        System.out.println(ll);
+
+        //ll.sort();
+        //System.out.println("\nSorted:\n" + ll);
+        //System.out.println("First: " + ll.first.value);
+        //System.out.println("Last: " + ll.last.value);
+
     }
 }
