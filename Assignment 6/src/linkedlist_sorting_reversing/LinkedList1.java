@@ -9,7 +9,6 @@ package linkedlist_sorting_reversing;
 
 import com.sun.jmx.remote.internal.ArrayQueue;
 
-
 @SuppressWarnings("Duplicates")
 class LinkedList1 {
     /**
@@ -62,10 +61,11 @@ class LinkedList1 {
             first = first.next;
         } while (first != null);
 
+        last.value = queue.get(0).toString();
+
         for (Object o : queue) {
             add(0, o.toString());
         }
-
     }
 
 //    public void reverse_() {
@@ -333,8 +333,7 @@ class LinkedList1 {
 
         //ll.sort();
         //System.out.println("\nSorted:\n" + ll);
-        //System.out.println("First: " + ll.first.value);
-        //System.out.println("Last: " + ll.last.value);
-
+        System.out.println("First: " + ll.first.value);
+        System.out.println("Last: " + ll.last.value);
     }
 }
