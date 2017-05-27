@@ -51,7 +51,7 @@ class LinkedList1 {
     }
 
     /**
-     * The reverse() method iterates through the LinkedList and reverses all the next pointers.
+     * The reverse() method adds all the Nodes to an ArrayQueue and then puts the Nodes in reverse order.
      */
     public void reverse() {
         ArrayQueue queue = new ArrayQueue(size());
@@ -63,8 +63,8 @@ class LinkedList1 {
 
         last.value = queue.get(0).toString();
 
-        for (Object o : queue) {
-            add(0, o.toString());
+        while(!queue.isEmpty()){
+            add(0, queue.remove(0).toString());
         }
     }
 

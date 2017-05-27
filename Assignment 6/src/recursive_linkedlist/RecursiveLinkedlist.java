@@ -7,14 +7,14 @@
  */
 package recursive_linkedlist;
 
-import java.util.Stack;
+import java.util.LinkedList;
 
 @SuppressWarnings("Duplicates")
 class RecursiveLinkedlist {
-    private Node prev = null;
-    private Node current;
-    private Node next;
-    private Node tempLast;
+//    private Node prev = null;
+//    private Node current;
+//    private Node next;
+//    private Node tempLast;
 
     public void sort() {
 
@@ -23,22 +23,14 @@ class RecursiveLinkedlist {
     /**
      * The reverse() method iterates through the LinkedList and reverses all the next pointers.
      */
-    public void reverse() {
-        Stack stack = new Stack();
-
-        getNext();
-
+    public RecursiveLinkedlist reverse(Node current, RecursiveLinkedlist reverseList) {
+        if (current==null)
+            return reverseList;
+        reverseList.add(0, current.value);
+        current = current.next;
+        return this.reverse(current, reverseList);
     }
 
-    private void getNext() {
-        //if(first.next!=null)
-
-    }
-
-    private void setNodes() {
-        current = first;
-        next = current.next;
-    }
 
     private class Node {
         String value;
@@ -279,8 +271,8 @@ class RecursiveLinkedlist {
         //ll.add(2, "Yami");
         System.out.println("The members of the list are:");
         System.out.print(ll);
-        //ll.reverse();
-        ll.sort();
+        ll = ll.reverse(ll.first, new RecursiveLinkedlist());
+        //ll.sort();
         System.out.println("\nSorted:\n" + ll);
         System.out.println("First: " + ll.first.value);
         System.out.println("Last: " + ll.last.value);
