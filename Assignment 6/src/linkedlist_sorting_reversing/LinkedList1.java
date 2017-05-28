@@ -54,7 +54,7 @@ class LinkedList1 {
      * The reverse() method adds all the Nodes to an ArrayQueue and then puts the Nodes in reverse order.
      */
     public void reverse() {
-        ArrayQueue queue = new ArrayQueue(size());
+        ArrayQueue<String> queue = new ArrayQueue<>(size());
 
         do {
             queue.add(first.value);
