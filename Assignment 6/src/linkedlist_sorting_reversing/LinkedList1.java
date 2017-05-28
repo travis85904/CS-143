@@ -61,10 +61,10 @@ class LinkedList1 {
             first = first.next;
         } while (first != null);
 
-        last.value = queue.get(0).toString();
+        last.value = queue.get(0);
 
         while(!queue.isEmpty()){
-            add(0, queue.remove(0).toString());
+            add(0, queue.remove(0));
         }
     }
 
