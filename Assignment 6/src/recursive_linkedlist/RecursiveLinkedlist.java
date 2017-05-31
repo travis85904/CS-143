@@ -1,6 +1,6 @@
 /**
  * Travis Davis
- * <p>
+ *
  * This is a modified version of LinkedList1. I have added sort() and reverse() methods.
  * The sort method sorts the list in alphabetical order.
  * The reverse method puts the list in reverse order.
