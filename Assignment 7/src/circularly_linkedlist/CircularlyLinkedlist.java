@@ -98,14 +98,15 @@ public class CircularlyLinkedlist {
 
     //Remove a node at a specified index by iterating through the list until the desired index is reached
     public String remove(int index) throws IndexOutOfBoundsException {
-        if (index >= size()) throw new IndexOutOfBoundsException();
+        final int SIZE = size();
+        if (index >= SIZE) throw new IndexOutOfBoundsException();
 
         if (index == 0) {
             first = first.next;
             return first.value;
         }
 
-        if (index == size() - 1) {
+        if (index == SIZE - 1) {
             last = last.prev;
             return last.value;
         }
@@ -127,6 +128,7 @@ public class CircularlyLinkedlist {
     //Remove a node which contains a specific String value by iterating through the list until the node with the
     //specified string is found
     public boolean remove(String e) {
+        final int SIZE = size();
         Node current = first;
         Node next = first.next;
 
@@ -141,7 +143,7 @@ public class CircularlyLinkedlist {
             return true;
         }
 
-        for (int i = 0; i < size(); i++) {
+        for (int i = 0; i < SIZE; i++) {
             if (current.value == e) {
                 current.prev.next = next;
                 next.prev = current.prev;
@@ -157,10 +159,31 @@ public class CircularlyLinkedlist {
     @Override
     //Return all the elements of the list in an easy to read format
     public String toString() {
+        final int SIZE = size();
         StringBuilder sb = new StringBuilder();
         Node n = first;
 
-        for (int i = 0; i < size(); i++) {
+        for (int i = 0; i < SIZE; i++) {
+            sb.append(n.value + "\n");
+            n = n.next;
+        }
+
+        return sb.toString();
+    }
+
+    //Print from index
+    public String toString(int index) throws IndexOutOfBoundsException{
+        final int SIZE = size();
+        StringBuilder sb = new StringBuilder();
+        Node n = first;
+
+        if(index>=SIZE) throw new IndexOutOfBoundsException();
+
+        for (int i = 0; i < index; i++) {
+            n = n.next;
+        }
+
+        for (int i = 0; i < SIZE; i++) {
             sb.append(n.value + "\n");
             n = n.next;
         }
@@ -174,12 +197,15 @@ public class CircularlyLinkedlist {
         cLinkedlist.add("1");
         cLinkedlist.add("2");
         cLinkedlist.add("3");
-        cLinkedlist.add("4", 2);
+        cLinkedlist.add("4");
+        cLinkedlist.add("5");
+        //cLinkedlist.add("4", 2);
         //cLinkedlist.remove(1);
         //cLinkedlist.remove("1");
-        cLinkedlist.add("g", 9);
+        //cLinkedlist.add("g", 9);
         System.out.println(cLinkedlist);
 
         System.out.println("Size: " + cLinkedlist.size());
+        System.out.println(cLinkedlist.toString(2));
     }
 }
