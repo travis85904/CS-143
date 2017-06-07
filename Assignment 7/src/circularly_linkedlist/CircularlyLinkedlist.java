@@ -57,7 +57,8 @@ public class CircularlyLinkedlist {
     }
 
     //Add a new node to the end of the list
-    public void add(String e) {
+    public void
+    add(String e) {
         if (isEmpty()) {
             first = new Node(e);
             last = first;
@@ -70,16 +71,15 @@ public class CircularlyLinkedlist {
 
     //Add a new node at a specified index by iterating through the list until the desired index is reached
     public void add(String e, int index) {
-        Node temp;
         Node current = first;
         Node next = first.next;
 
         if (index == 0) {
-            temp = first;
+            Node temp = first;
             first = new Node(e, temp, last);
             temp.prev = first;
         } else if (index == size()) {
-            temp = last;
+            Node temp = last;
             last = new Node(e, first, temp);
             temp.next = last;
         } else {
@@ -89,46 +89,43 @@ public class CircularlyLinkedlist {
                 next = next.next;
             }
 
-            temp = current;
-            current = new Node(e, temp, temp.prev);
-            temp.prev.next = current;
-            temp.prev = current;
+            Node n = new Node(e, current, current.prev);
+            current.prev.next = n;
+            current.prev = n;
         }
     }
 
     //Remove a node at a specified index by iterating through the list until the desired index is reached
-    public String remove(int index) throws IndexOutOfBoundsException {
-        final int SIZE = size();
-        if (index >= SIZE) throw new IndexOutOfBoundsException();
+    public String remove(int index) {
 
         if (index == 0) {
             first = first.next;
             return first.value;
         }
 
-        if (index == SIZE - 1) {
+        if (index == size() - 1) {
             last = last.prev;
             return last.value;
         }
 
         Node current = first;
-        Node next = first.next;
 
         for (int i = 0; i < index; i++) {
-            current = next;
-            next = next.next;
+            current = current.next;
         }
 
-        current.prev.next = next;
-        next.prev = current.prev;
+        Node next = current.next;
+        Node prev = current.prev;
 
-        return current.value = null;
+        prev.next = next;
+        next.prev = prev;
+
+        return current.value;
     }
 
     //Remove a node which contains a specific String value by iterating through the list until the node with the
     //specified string is found
     public boolean remove(String e) {
-        final int SIZE = size();
         Node current = first;
         Node next = first.next;
 
@@ -143,7 +140,7 @@ public class CircularlyLinkedlist {
             return true;
         }
 
-        for (int i = 0; i < SIZE; i++) {
+        for (int i = 0; i < size(); i++) {
             if (current.value == e) {
                 current.prev.next = next;
                 next.prev = current.prev;
@@ -159,12 +156,11 @@ public class CircularlyLinkedlist {
     @Override
     //Return all the elements of the list in an easy to read format
     public String toString() {
-        final int SIZE = size();
         StringBuilder sb = new StringBuilder();
         Node n = first;
 
-        for (int i = 0; i < SIZE; i++) {
-            sb.append(n.value + "\n");
+        for (int i = 0; i < size(); i++) {
+            sb.append(n.value + ",");
             n = n.next;
         }
 
@@ -172,12 +168,12 @@ public class CircularlyLinkedlist {
     }
 
     //Print from index
-    public String toString(int index) throws IndexOutOfBoundsException{
+    public String toString(int index) throws IndexOutOfBoundsException {
         final int SIZE = size();
         StringBuilder sb = new StringBuilder();
         Node n = first;
 
-        if(index>=SIZE) throw new IndexOutOfBoundsException();
+        if (index >= SIZE) throw new IndexOutOfBoundsException();
 
         for (int i = 0; i < index; i++) {
             n = n.next;
@@ -194,18 +190,33 @@ public class CircularlyLinkedlist {
     public static void main(String[] args) {
         CircularlyLinkedlist cLinkedlist = new CircularlyLinkedlist();
 
+//        cLinkedlist.add("1");
+//        cLinkedlist.add("2",0);
+//        cLinkedlist.add("3");
+//        cLinkedlist.add("4", 2);
+//        cLinkedlist.remove(1);
+//        cLinkedlist.remove("1");
+//        cLinkedlist.add("g", 4);
+//        cLinkedlist.remove(0);
+
         cLinkedlist.add("1");
         cLinkedlist.add("2");
         cLinkedlist.add("3");
         cLinkedlist.add("4");
         cLinkedlist.add("5");
-        //cLinkedlist.add("4", 2);
-        //cLinkedlist.remove(1);
-        //cLinkedlist.remove("1");
-        //cLinkedlist.add("g", 9);
+        cLinkedlist.add("6");
+        cLinkedlist.add("7");
+        cLinkedlist.add("8");
+        cLinkedlist.add("9");
+        cLinkedlist.add("10");
+
         System.out.println(cLinkedlist);
 
         System.out.println("Size: " + cLinkedlist.size());
-        System.out.println(cLinkedlist.toString(2));
+        System.out.println("First: " + cLinkedlist.first.value);
+        System.out.println("Last: " + cLinkedlist.last.value);
+
+        System.out.println(cLinkedlist.toString
+                (3));
     }
 }
