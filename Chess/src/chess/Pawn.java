@@ -33,8 +33,8 @@ public class Pawn extends ChessPiece {
             if (pieceLocX == 6) {
                 if (pieceLocX - moveLocX != 1 && pieceLocX - moveLocX != 2)
                     return false;
-            }
-            if (pieceLocX - moveLocX != 1)
+            } else if
+                    (pieceLocX - moveLocX != 1)
                 return false;
         }
 //        if (pieceLocX - moveLocX != 1 || pieceLocX - moveLocX != -1)
