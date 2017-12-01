@@ -1,9 +1,6 @@
 package chess;
 
 public class Pawn extends ChessPiece {
-    private ChessPiece[][] board;
-    private int pieceLocX, pieceLocY, moveLocX, moveLocY;
-
     public Pawn(Color color) {
         super(color);
     }
@@ -14,27 +11,50 @@ public class Pawn extends ChessPiece {
 
     @Override
     public boolean legalMove(ChessPiece[][] board, int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
-        this.board = board;
-        this.pieceLocX = pieceLocX;
-        this.pieceLocY = pieceLocY;
-        this.moveLocX = moveLocX;
-        this.moveLocY = moveLocY;
+        ChessPiece piece = board[pieceLocX][pieceLocY];
+        ChessPiece moveLoc = board[moveLocX][moveLocY];
 
-        //
+        if (!checkPath(board, pieceLocX, pieceLocY, moveLocX, moveLocY))
+            return false;
+
+        if (pieceLocY == moveLocY && moveLoc != null && moveLoc.color == piece.color)
+            return false;
+
+        if (piece.color == Color.white) {
+            if (pieceLocX == 1) {
+                if (moveLocX - pieceLocX != 1 && moveLocX - pieceLocX != 2)
+                    return false;
+            }
+            if (moveLocX - pieceLocX != 1)
+                return false;
+        }
+
+        if (piece.color == Color.black) {
+            if (pieceLocX == 6) {
+                if (pieceLocX - moveLocX != 1 && pieceLocX - moveLocX != 2)
+                    return false;
+            }
+            if (pieceLocX - moveLocX != 1)
+                return false;
+        }
+//        if (pieceLocX - moveLocX != 1 || pieceLocX - moveLocX != -1)
+//            return false;
+//        if (pieceLocY - moveLocY != 1 || pieceLocY - moveLocY != -1)
+//            return false;
+
         if (pieceLocY != moveLocY) {
-            if (board[moveLocX][moveLocY] == null)
+            if (moveLoc == null)
                 return false;
-            if (pieceLocX - moveLocX != 1 || pieceLocX - moveLocX != -1)
-                return false;
-            if (pieceLocY - moveLocY != 1 || pieceLocY - moveLocY != -1)
-                return false;
+//            if (moveLoc.color == piece.color)
+//                return false;
         }
 
         return true;
     }
 
     @Override
-    public boolean checkPath() {
+    public boolean checkPath(ChessPiece[][] board, int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
+
         return true;
     }
 

@@ -1,8 +1,7 @@
 package chess;
 
 public class King extends ChessPiece {
-    private ChessPiece[][] board;
-    private int pieceLocX, pieceLocY, moveLocX, moveLocY;
+
     private boolean xMove, yMove, diagMove;
 
     public King(Color color) {
@@ -14,14 +13,11 @@ public class King extends ChessPiece {
 
     @Override
     public boolean legalMove(ChessPiece[][] board, int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
-        this.pieceLocX = this.pieceLocX;
-        this.pieceLocY = this.pieceLocY;
-        this.moveLocX = this.moveLocX;
-        this.moveLocY = this.moveLocY;
+
         xMove = false;
         yMove = false;
         diagMove = false;
-
+        if (!checkPath(board, pieceLocX, pieceLocY, moveLocX, moveLocY)) return false;
         if ((moveLocX - pieceLocX == 1 || moveLocX - pieceLocX == -1) && moveLocY == pieceLocY) {
             xMove = true;
             return true;
@@ -37,7 +33,7 @@ public class King extends ChessPiece {
     }
 
     @Override
-    public boolean checkPath() {
+    public boolean checkPath(ChessPiece[][] board, int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
 
         if (xMove && board[moveLocX][moveLocY] == null) {
             return true;

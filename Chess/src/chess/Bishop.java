@@ -1,9 +1,6 @@
 package chess;
 
 public class Bishop extends ChessPiece {
-    private ChessPiece[][] board;
-    private int pieceLocX, pieceLocY, moveLocX, moveLocY;
-
     public Bishop(Color color) {
         super(color);
     }
@@ -14,10 +11,8 @@ public class Bishop extends ChessPiece {
 
     @Override
     public boolean legalMove(ChessPiece[][] board, int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
-        this.pieceLocX = pieceLocX;
-        this.pieceLocY = pieceLocY;
-        this.moveLocX = moveLocX;
-        this.moveLocY = moveLocY;
+
+        if (!checkPath(board, pieceLocX, pieceLocY, moveLocX, moveLocY)) return false;
         if (moveLocX > pieceLocX || moveLocX < pieceLocX) {
             if (moveLocY > pieceLocY || moveLocY < pieceLocY) {
                 if (Math.abs(moveLocX - pieceLocX) == Math.abs(moveLocY - pieceLocY)) {
@@ -32,7 +27,7 @@ public class Bishop extends ChessPiece {
     }
 
     @Override
-    public boolean checkPath() {
+    public boolean checkPath(ChessPiece[][] board, int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
         if (moveLocX > pieceLocX) {
             if (moveLocY > pieceLocY) {
                 for (int i = pieceLocX + 1; i < moveLocX; i++) {

@@ -1,8 +1,7 @@
 package chess;
 
 public class Queen extends ChessPiece {
-    private ChessPiece[][] board;
-    private int pieceLocX, pieceLocY, moveLocX, moveLocY;
+
     public Queen(Color color) {
         super(color);
     }
@@ -10,15 +9,12 @@ public class Queen extends ChessPiece {
 
     @Override
     public boolean legalMove(ChessPiece[][] board, int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
-        this.pieceLocX = this.pieceLocX;
-        this.pieceLocY = this.pieceLocY;
-        this.moveLocX = this.moveLocX;
-        this.moveLocY = this.moveLocY;
+        if (!checkPath(board, pieceLocX, pieceLocY, moveLocX, moveLocY)) return false;
         return true;
     }
 
     @Override
-    public boolean checkPath() {
+    public boolean checkPath(ChessPiece[][] board, int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
         return false;
     }
     @Override

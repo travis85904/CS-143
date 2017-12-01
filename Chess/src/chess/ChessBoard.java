@@ -27,11 +27,11 @@ public class ChessBoard {
         for (int col = 0; col < 8; col++) {
             board[1][col] = new Pawn(Color.white);
         }
-        for (int row = 2; row < 6; row++) {
-            for (int col = 0; col < 8; col++) {
-                board[row][col] = null;
-            }
-        }
+//        for (int row = 2; row < 6; row++) {
+//            for (int col = 0; col < 8; col++) {
+//                board[row][col] = null;
+//            }
+//        }
         for (int col = 0; col < 8; col++) {
             board[6][col] = new Pawn(Color.black);
         }
@@ -53,15 +53,19 @@ public class ChessBoard {
         board[x][y] = piece;
     }
 
-    public void move(int[] locationAry, int[] moveAry) throws Exception {
-        pieceLocX = locationAry[0];//location of the piece to be moved
-        pieceLocY = locationAry[1];
-        moveLocX = moveAry[0];//desired location to move the piece to
-        moveLocY = moveAry[1];
+    public void move(String pieceLocation, String move) {
+        int[] locAry = ChessUtil.coordsToArray(pieceLocation);
+        int[] movAry = ChessUtil.coordsToArray(move);
 
-        ChessPiece piece = getPiece(pieceLocX, pieceLocY);
+        pieceLocX = locAry[0];//location of the piece to be moved
+        pieceLocY = locAry[1];
+        moveLocX = movAry[0];//desired location to move the piece to
+        moveLocY = movAry[1];
 
-        if (checkSpot() && piece.legalMove(board, pieceLocX, pieceLocY, moveLocX, moveLocY) && piece.checkPath()) {
+        //ChessPiece piece = getPiece(pieceLocX, pieceLocY);
+        ChessPiece piece = board[pieceLocX][pieceLocY];
+
+        if (checkSpot() && piece.legalMove(board, pieceLocX, pieceLocY, moveLocX, moveLocY)) {
             if (board[moveLocX][moveLocY] != null && checkLegalCapture())
                 System.out.println("You captured " + board[moveLocX][moveLocY]);
 
@@ -71,15 +75,18 @@ public class ChessBoard {
     }
 
     public boolean checkLegalCapture() {
+        Color pieceColor = board[pieceLocX][pieceLocY].getColor();
+        Color moveColor = board[moveLocX][moveLocY].getColor();
+        ChessPiece piece = board[pieceLocX][pieceLocY];
 
-        if (board[pieceLocX][pieceLocY].equals(Pawn.class)) {
+        if (piece.equals(Pawn.class)) {
             if (pieceLocY == moveLocY)
                 return false;
         }
-        if (board[pieceLocX][pieceLocY].getColor() != board[moveLocX][moveLocY].getColor()) { //Check if there a piece at moveLocX, moveLocY that will be captured
-            return true;
+        if (pieceColor == moveColor) { //Make sure you are capturing a piece of the opposite color
+            return false;
         }
-        return false;
+        return true;
     }
 
     public boolean checkSpot() {
@@ -100,7 +107,8 @@ public class ChessBoard {
             for (ChessPiece spot : board[i]) {
                 if (spot == null)
                     sb.append(".");
-                else sb.append(spot);
+                else
+                    sb.append(spot);
             }
             sb.append("\n");
         }
