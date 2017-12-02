@@ -2,7 +2,8 @@ package chess;
 
 public class ChessBoard {
     private ChessPiece[][] board = new ChessPiece[8][8];
-    private int pieceLocX, pieceLocY, moveLocX, moveLocY;
+    //private int pieceLocX, pieceLocY, moveLocX, moveLocY;
+    private Color lastMoveColor;
 
     public ChessBoard() {
 
@@ -27,11 +28,6 @@ public class ChessBoard {
         for (int col = 0; col < 8; col++) {
             board[1][col] = new Pawn(Color.white);
         }
-//        for (int row = 2; row < 6; row++) {
-//            for (int col = 0; col < 8; col++) {
-//                board[row][col] = null;
-//            }
-//        }
         for (int col = 0; col < 8; col++) {
             board[6][col] = new Pawn(Color.black);
         }
@@ -56,6 +52,7 @@ public class ChessBoard {
     public void move(String pieceLocation, String move) {
         int[] locAry = ChessUtil.coordsToArray(pieceLocation);
         int[] movAry = ChessUtil.coordsToArray(move);
+        int pieceLocX, pieceLocY, moveLocX, moveLocY;
 
         pieceLocX = locAry[0];//location of the piece to be moved
         pieceLocY = locAry[1];
@@ -65,16 +62,17 @@ public class ChessBoard {
         //ChessPiece piece = getPiece(pieceLocX, pieceLocY);
         ChessPiece piece = board[pieceLocX][pieceLocY];
 
-        if (checkSpot() && piece.legalMove(board, pieceLocX, pieceLocY, moveLocX, moveLocY)) {
-            if (board[moveLocX][moveLocY] != null && checkLegalCapture())
+        if (checkSpot(pieceLocX, pieceLocY, moveLocX, moveLocY) && piece.legalMove(board, pieceLocX, pieceLocY, moveLocX, moveLocY)) {
+            if (board[moveLocX][moveLocY] != null && checkLegalCapture(pieceLocX, pieceLocY, moveLocX, moveLocY))
                 System.out.println("You captured " + board[moveLocX][moveLocY]);
 
             board[moveLocX][moveLocY] = board[pieceLocX][pieceLocY];
             board[pieceLocX][pieceLocY] = null;
+            lastMoveColor = board[moveLocX][moveLocY].color;
         }
     }
 
-    public boolean checkLegalCapture() {
+    public boolean checkLegalCapture(int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
         Color pieceColor = board[pieceLocX][pieceLocY].getColor();
         Color moveColor = board[moveLocX][moveLocY].getColor();
         ChessPiece piece = board[pieceLocX][pieceLocY];
@@ -89,7 +87,7 @@ public class ChessBoard {
         return true;
     }
 
-    public boolean checkSpot() {
+    public boolean checkSpot(int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
         if (moveLocX == pieceLocX && moveLocY == pieceLocY) { // Make sure the move location is not the same as the piece location
             System.out.println("ERROR: The piece is already in the specified location");
             return false;

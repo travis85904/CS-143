@@ -24,8 +24,7 @@ public class Pawn extends ChessPiece {
             if (pieceLocX == 1) {
                 if (moveLocX - pieceLocX != 1 && moveLocX - pieceLocX != 2)
                     return false;
-            }
-            if (moveLocX - pieceLocX != 1)
+            } else if (moveLocX - pieceLocX != 1)
                 return false;
         }
 
@@ -33,20 +32,13 @@ public class Pawn extends ChessPiece {
             if (pieceLocX == 6) {
                 if (pieceLocX - moveLocX != 1 && pieceLocX - moveLocX != 2)
                     return false;
-            } else if
-                    (pieceLocX - moveLocX != 1)
+            } else if (pieceLocX - moveLocX != 1)
                 return false;
         }
-//        if (pieceLocX - moveLocX != 1 || pieceLocX - moveLocX != -1)
-//            return false;
-//        if (pieceLocY - moveLocY != 1 || pieceLocY - moveLocY != -1)
-//            return false;
 
         if (pieceLocY != moveLocY) {
             if (moveLoc == null)
                 return false;
-//            if (moveLoc.color == piece.color)
-//                return false;
         }
 
         return true;

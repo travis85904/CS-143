@@ -44,6 +44,15 @@ public class King extends ChessPiece {
         }
         return false;
     }
+
+    public boolean check(){
+        return false;
+    }
+
+    public boolean checkMate(){
+        return false;
+    }
+
     @Override
     public String toString() {
         return (color == Color.white) ? "K" : "k";
