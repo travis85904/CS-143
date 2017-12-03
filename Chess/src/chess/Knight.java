@@ -12,7 +12,7 @@ public class Knight extends ChessPiece {
     @Override
     public boolean legalMove(ChessPiece[][] board, int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
         if (!pathClear(board, pieceLocX, pieceLocY, moveLocX, moveLocY)) return false;
-        // needs to be implemented
+
         if (Math.abs(pieceLocX - moveLocX) == 2 && Math.abs(pieceLocY - moveLocY) == 1)
             return true;
         if (Math.abs(pieceLocY - moveLocY) == 2 && Math.abs(pieceLocX - moveLocX) == 1)
