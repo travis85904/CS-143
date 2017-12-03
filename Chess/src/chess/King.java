@@ -17,7 +17,7 @@ public class King extends ChessPiece {
         xMove = false;
         yMove = false;
         diagMove = false;
-        if (!checkPath(board, pieceLocX, pieceLocY, moveLocX, moveLocY)) return false;
+        if (!pathClear(board, pieceLocX, pieceLocY, moveLocX, moveLocY)) return false;
         if ((moveLocX - pieceLocX == 1 || moveLocX - pieceLocX == -1) && moveLocY == pieceLocY) {
             xMove = true;
             return true;
@@ -33,7 +33,7 @@ public class King extends ChessPiece {
     }
 
     @Override
-    public boolean checkPath(ChessPiece[][] board, int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
+    public boolean pathClear(ChessPiece[][] board, int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
 
         if (xMove && board[moveLocX][moveLocY] == null) {
             return true;
@@ -46,10 +46,12 @@ public class King extends ChessPiece {
     }
 
     public boolean check(){
+        // needs to be implemented
         return false;
     }
 
     public boolean checkMate(){
+        // needs to be implemented
         return false;
     }
 

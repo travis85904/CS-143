@@ -17,6 +17,16 @@ public class main {
         chessBoard.move("a1","a2");
         chessBoard.move("a2", "b3");
         chessBoard.move("a4","a5");
+        chessBoard.move("d1","c1");
+        chessBoard.move("c1", "d2");
+        chessBoard.setPiece(2,2, new Queen(Color.black));
+        //chessBoard.setPiece(3,3, new Pawn(Color.black));
+        chessBoard.move("c6","d5");
+        chessBoard.move("d5", "d7");
+        chessBoard.setPiece(5,2, new Pawn(Color.black));
+        chessBoard.move("b1","c3");
+
+
 
 
         System.out.println(chessBoard);

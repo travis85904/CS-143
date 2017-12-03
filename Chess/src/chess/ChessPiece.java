@@ -18,7 +18,7 @@ public abstract class ChessPiece {
 
     public abstract boolean legalMove(ChessPiece[][] board, int locX, int locY, int movX, int movY);
 
-    public abstract boolean checkPath(ChessPiece[][] board, int pieceLocX, int pieceLocY, int moveLocX, int moveLocY);
+    public abstract boolean pathClear(ChessPiece[][] board, int pieceLocX, int pieceLocY, int moveLocX, int moveLocY);
 
     @Override
     public abstract String toString();

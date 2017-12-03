@@ -1,7 +1,6 @@
 package chess;
 
 public class Knight extends ChessPiece {
-
     public Knight(Color color) {
         super(color);
     }
@@ -12,13 +11,19 @@ public class Knight extends ChessPiece {
 
     @Override
     public boolean legalMove(ChessPiece[][] board, int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
-        if (!checkPath(board, pieceLocX, pieceLocY, moveLocX, moveLocY)) return false;
-        return true;
+        if (!pathClear(board, pieceLocX, pieceLocY, moveLocX, moveLocY)) return false;
+        // needs to be implemented
+        if (Math.abs(pieceLocX - moveLocX) == 2 && Math.abs(pieceLocY - moveLocY) == 1)
+            return true;
+        if (Math.abs(pieceLocY - moveLocY) == 2 && Math.abs(pieceLocX - moveLocX) == 1)
+            return true;
+        return false;
     }
 
     @Override
-    public boolean checkPath(ChessPiece[][] board, int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
-        return false;
+    public boolean pathClear(ChessPiece[][] board, int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
+        // needs to be implemented
+        return true;
     }
 
     @Override

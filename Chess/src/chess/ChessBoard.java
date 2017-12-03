@@ -59,12 +59,12 @@ public class ChessBoard {
         moveLocX = movAry[0];//desired location to move the piece to
         moveLocY = movAry[1];
 
-        //ChessPiece piece = getPiece(pieceLocX, pieceLocY);
         ChessPiece piece = board[pieceLocX][pieceLocY];
 
         if (checkSpot(pieceLocX, pieceLocY, moveLocX, moveLocY) && piece.legalMove(board, pieceLocX, pieceLocY, moveLocX, moveLocY)) {
-            if (board[moveLocX][moveLocY] != null && checkLegalCapture(pieceLocX, pieceLocY, moveLocX, moveLocY))
-                System.out.println("You captured " + board[moveLocX][moveLocY]);
+            if (board[moveLocX][moveLocY] != null && !legalCapture(pieceLocX, pieceLocY, moveLocX, moveLocY)) {
+                return;
+            }
 
             board[moveLocX][moveLocY] = board[pieceLocX][pieceLocY];
             board[pieceLocX][pieceLocY] = null;
@@ -72,7 +72,7 @@ public class ChessBoard {
         }
     }
 
-    public boolean checkLegalCapture(int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
+    public boolean legalCapture(int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
         Color pieceColor = board[pieceLocX][pieceLocY].getColor();
         Color moveColor = board[moveLocX][moveLocY].getColor();
         ChessPiece piece = board[pieceLocX][pieceLocY];

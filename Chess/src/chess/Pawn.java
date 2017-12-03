@@ -14,7 +14,7 @@ public class Pawn extends ChessPiece {
         ChessPiece piece = board[pieceLocX][pieceLocY];
         ChessPiece moveLoc = board[moveLocX][moveLocY];
 
-        if (!checkPath(board, pieceLocX, pieceLocY, moveLocX, moveLocY))
+        if (!pathClear(board, pieceLocX, pieceLocY, moveLocX, moveLocY))
             return false;
 
         if (pieceLocY == moveLocY && moveLoc != null && moveLoc.color == piece.color)
@@ -45,7 +45,7 @@ public class Pawn extends ChessPiece {
     }
 
     @Override
-    public boolean checkPath(ChessPiece[][] board, int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
+    public boolean pathClear(ChessPiece[][] board, int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
 
         return true;
     }

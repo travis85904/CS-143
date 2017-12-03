@@ -14,14 +14,14 @@ public class Rook extends ChessPiece {
 
     @Override
     public boolean legalMove(ChessPiece[][] board, int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
-        if (!checkPath(board, pieceLocX, pieceLocY, moveLocX, moveLocY)) return false;
+        if (!pathClear(board, pieceLocX, pieceLocY, moveLocX, moveLocY)) return false;
         if (pieceLocX != moveLocX && pieceLocY != moveLocY)//checks that the rook is only moving along 1 axis
             return false;
         return true;
     }
 
     @SuppressWarnings("Duplicates")
-    public boolean checkPath(ChessPiece[][] board, int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
+    public boolean pathClear(ChessPiece[][] board, int pieceLocX, int pieceLocY, int moveLocX, int moveLocY) {
         if (pieceLocY == moveLocY) {
             if (pieceLocX > moveLocX) {
                 for (int i = (pieceLocX - 1); i > moveLocX; i--) {
