@@ -2,11 +2,9 @@ package chess;
 
 public class ChessBoard {
     private ChessPiece[][] board = new ChessPiece[8][8];
-    //private int pieceLocX, pieceLocY, moveLocX, moveLocY;
     private Color lastMoveColor;
 
     public ChessBoard() {
-
         board[0][0] = new Rook(Color.white);
         board[0][1] = new Knight(Color.white);
         board[0][2] = new Bishop(Color.white);
